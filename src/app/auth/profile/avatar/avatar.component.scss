@@ -1,0 +1,71 @@
+.app-avatar {
+    width: 95%;
+    border-radius: 6px;
+}
+
+.avatar-remove {
+    position: relative;
+    left: -2em;
+}
+
+.app-avatar-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.app-avatar-upload {
+    height: 212px;
+    border: 2px dotted #979797;
+    border-radius: 4px;
+    background: url("../../../../assets/images/logo.png") center no-repeat #FBFBFB;
+}
+
+.app-avatar-upload-dragover {
+    opacity: 0.5;
+    height: 212px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background: url("../../../../assets/images/logo.png") center no-repeat #cccccc;
+}
+
+.app-upload-input {
+    margin-top: 0.5em;
+}
+
+.app-upload-button {
+    margin: 0.5em auto !important;
+    width: 100% !important;
+}
+
+.app-avatar-preview {
+    width: auto;
+    max-height: 200px;
+}
+
+.app-image-container {
+    display: inline;
+}
+
+.app-image {
+    width: 30%;
+    margin: 0.2em;
+    border-radius: 6px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+.app-avatar {
+    width: 100%;
+}
+.app-image {
+    width: 100%;
+}
+.app-avatar-container {
+    width: auto;
+}
+.app-avatar-upload {
+    width: auto;
+}
+}

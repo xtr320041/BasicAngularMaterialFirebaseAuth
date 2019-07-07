@@ -1,21 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-toolbar class = "docHeader">
+  <button mat-button (click)="sidenav.toggle()" title="Show/Hide Menu">
+    <mat-icon class="white-icon">menu</mat-icon>
+  </button>
+  <h2 class="mat-title">{{title}}</h2>
+  <span class="fill-remaining-space"></span>
+  <button mat-button (click)="signOut()" title="Sign out" *ngIf="isSignin">
+    <mat-icon class="white-icon">exit_to_app</mat-icon>
+  </button>
+  <button mat-button (click)="openHelp()" title="Display help">
+      <mat-icon class="white-icon">help_outline</mat-icon>
+    </button>  
+  <img src="./assets/images/docLogo.png" alt="logo" style="padding-top:3px; padding-left:20px">
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav [mode]="mode">
+    <!-- <button mat-button (click)="sidenav.toggle()" style="width: 100%" title="Hide menu items">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <hr /> -->
+    <mat-list-item *ngFor="let route of baseNav">
+      <a mat-button routerLink="{{route.path}}" routerLinkActive="active" (click)="sidenav.toggle()"> -
+        {{route.title}}</a>
+    </mat-list-item>
+    <mat-list-item *ngIf="!isSignin">
+        <a mat-button routerLink="/auth/signin" routerLinkActive="active" (click)="sidenav.toggle()"> -
+          Sign In</a>
+    </mat-list-item>   
+    <mat-list-item *ngIf="isSignin">
+        <a mat-button (click)="signOut(); sidenav.toggle()"> -
+          Sign Out</a>
+    </mat-list-item>      
+    <mat-list-item *ngIf="isSignin">
+      <a mat-button routerLink="/auth/profile" routerLinkActive="active" (click)="sidenav.toggle()"> -
+        Edit Account</a>
+  </mat-list-item>         
+    <div *ngIf="isAdmin">
+      <hr />
+      <span class="sidenav-header">System Administration</span>
+      <hr />
+      <mat-list-item *ngFor="let route of adminNav">
+        <a mat-button routerLink="{{route.path}}" routerLinkActive="active" (click)="sidenav.toggle()"> -
+          {{route.title}}</a>
+      </mat-list-item>
+    </div>
+    <div *ngIf="doGis">
+      <hr />
+      <span class="sidenav-header">GIS Sync</span>
+      <hr />
+      <mat-list-item *ngFor="let route of gisNav">
+        <a mat-button routerLink="{{route.path}}" routerLinkActive="active" (click)="sidenav.toggle()"> -
+          {{route.title}}</a>
+      </mat-list-item>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
