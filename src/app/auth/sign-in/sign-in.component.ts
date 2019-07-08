@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-//import { CognitoUser } from '@aws-amplify/auth';
+import { CognitoUser } from '@aws-amplify/auth';
 import { NotificationService } from 'src/app/commonUI/notification.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -49,8 +49,8 @@ export class SignInComponent {
     let myLoad = this._loader;
     myLoad.show();
     this.auth.signIn(this.emailInput.value, this.passwordInput.value)
-    //.then((user: CognitoUser|any) => {
-      .then((user: any) => {
+      .then((user: CognitoUser|any) => {
+      //.then((user: any) => {
         setTimeout(function(){ myLoad.hide(); }, 1000);
         this._router.navigate(['']);
       })
@@ -72,7 +72,6 @@ export class SignInComponent {
   }
 
   async signInWithFacebook() {
-    //const socialResult = await this.auth.socialSignIn(AuthService.FACEBOOK);
     const socialResult = await this.auth.socialSignIn(AuthService.FACEBOOK);
     console.log('fb Result:', socialResult);
   }

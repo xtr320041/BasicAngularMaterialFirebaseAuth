@@ -1,0 +1,8 @@
+{
+	"auth": {
+		"ng34704b9cf": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

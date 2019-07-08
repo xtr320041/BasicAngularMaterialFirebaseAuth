@@ -98,10 +98,10 @@ export class AppComponent {
       this.isAdmin = true;
       this.doGis = true;
     }
-    // this.auth.getEmitter().subscribe((customObject) => {
-    //   //console.log("Component is notified of successfull login!");
-    //   this.isSignin = customObject;
-    // });
+    this.auth.getEmitter().subscribe((customObject) => {
+      //console.log("Component is notified of successfull login!");
+      this.isSignin = customObject;
+    });
     console.log(localStorage.IsLoggin);
     console.log(localStorage);
     console.log(this.auth);

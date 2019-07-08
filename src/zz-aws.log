@@ -1,0 +1,6 @@
+
+Hosted UI Endpoint: https://ng3-dev.auth.ap-southeast-2.amazoncognito.com/
+Test Your Hosted UI Endpoint: https://ng3-dev.auth.ap-southeast-2.amazoncognito.com/login?response_type=code&client_id=5ao0rd9lu58khk7coj9rd28ne2&redirect_uri=http://localhost:4200/auth/
+
+Bird Banding
+https://birdbanding-dev-doc-govt-nz.auth.ap-southeast-2.amazoncognito.com/login?response_type=code&client_id=7phsg1kmo2fur8n67j5rjki9au&redirect_uri=https://d3k5w6beq33stz.cloudfront.net/index.html

@@ -1,0 +1,21 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "ng3-dev-20190708110919-authRole",
+            "UnauthRoleArn": "arn:aws:iam::252379044400:role/ng3-dev-20190708110919-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::252379044400:role/ng3-dev-20190708110919-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "ng3-dev-20190708110919-deployment",
+            "UnauthRoleName": "ng3-dev-20190708110919-unauthRole",
+            "StackName": "ng3-dev-20190708110919",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:252379044400:stack/ng3-dev-20190708110919/3fc22b80-a10c-11e9-a408-0ae74239a372"
+        },
+        "categories": {
+            "auth": {
+                "ng34704b9cf": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"781033531656-qnr26n48bbpd5kgqtoab6nr14t1rug3a.apps.googleusercontent.com\",\"client_secret\":\"LVIYMfbXZcO0cM34ZdpaSv-P\"}]"
+                }
+            }
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/commonUI/notification.service';
 import { LoadingService } from 'src/app/commonUI/loading/loading.service';
-// import Auth, { CognitoUser } from '@aws-amplify/auth';
+import Auth, { CognitoUser } from '@aws-amplify/auth';
 // import Storage from '@aws-amplify/storage';
 
 @Component({
@@ -24,8 +24,8 @@ export class ProfileComponent implements OnInit {
   avatar: string;
   deleteAvatar = false;
   profile:any = {};
-  //user: CognitoUser;
-  user: any;
+  user: CognitoUser;
+  //user: any;
   
   get emailInput() { return this.profileForm.get('email'); }
   get fnameInput() { return this.profileForm.get('fname'); }
@@ -44,10 +44,10 @@ export class ProfileComponent implements OnInit {
   }
 
   async getUserInfo() {
-    //this.profile = await Auth.currentUserInfo();
-    //console.log(this.profile);
-    //this.user = await Auth.currentAuthenticatedUser();
-    //console.log(this.user);
+    this.profile = await Auth.currentUserInfo();
+    console.log(this.profile);
+    this.user = await Auth.currentAuthenticatedUser();
+    console.log(this.user);
 
     if ( this.profile.attributes['profile'] ) {
       this.avatar = this.profile.attributes['profile'];
@@ -74,8 +74,8 @@ export class ProfileComponent implements OnInit {
 
   signOut() {
     this._authService.signOut()
-      //.then(() => {this._router.navigate(['auth/signin'])})
-      //.then(() => this._router.navigate(['/']))
+      .then(() => {this._router.navigate(['auth/signin'])})
+      .then(() => this._router.navigate(['/']))
   }
 
   onAvatarUploadComplete(data: any) {
@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
         attributes['profile'] = this.avatar;
       }
       console.log(this.avatar);
-      //await Auth.updateUserAttributes(this.user,attributes);
+      await Auth.updateUserAttributes(this.user,attributes);
       console.log("after save user.");
       if (!this.avatar && this.deleteAvatar) {
         this.user.deleteAttributes(["profile"],(error) => {
