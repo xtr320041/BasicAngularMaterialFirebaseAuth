@@ -17,7 +17,7 @@ Amplify add Auth<br/>
 
 Amplify push<br/>
 
-Note: ensure aws-exports.js has been generated<br/>
+//Note: ensure aws-exports.js has been generated with your own AWS account details.<br/>
 
 ng serve<br/>
 
