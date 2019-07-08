@@ -2,7 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.<br/>
 This is a boilerplate project with Material side-nav menu and AWS Cognito Authentication. <br />
-Some of the codes are based on the following repository from .
+Some of the codes are based on the following repository from Michael Labieniec.<br />
+https://github.com/mlabieniec/AngularMaterialPWA.git
 
 
 # To Setup 
