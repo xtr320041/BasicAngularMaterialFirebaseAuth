@@ -4,6 +4,9 @@
   </button>
   <h2 class="mat-title">{{title}}</h2>
   <span class="fill-remaining-space"></span>
+  <button mat-button (click)="goMyAccount()" title="{{currentUserName}}" *ngIf="isSignin">
+    <mat-icon class="white-icon">person</mat-icon>
+  </button>  
   <button mat-button (click)="signOut()" title="Sign out" *ngIf="isSignin">
     <mat-icon class="white-icon">exit_to_app</mat-icon>
   </button>

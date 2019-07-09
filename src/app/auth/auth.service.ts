@@ -26,17 +26,19 @@ export class AuthService {
 
   public static SIGN_IN = 'signIn';
   public static SIGN_OUT = 'signOut'; 
-  public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
+  public static FACEBOOK = CognitoHostedUIIdentityProvider.Cognito;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
 
   constructor() { 
+    
     Hub.listen('auth',(data) => {
       const { channel, payload } = data;
       if (channel === 'auth') {
         this._authState.next(payload.event);
       }
     });
+
   }
   
   signUp(user: NewUser): Promise<CognitoUser|any> {
@@ -52,9 +54,10 @@ export class AuthService {
         }
       })
       .then((user: CognitoUser|any) => {
-        this.loggedIn = true;
-        this.fireIsLoggedIn.emit(true); 
-        localStorage.setItem('IsLoggin', 'true');
+        // this.loggedIn = true;
+        // this.fireIsLoggedIn.emit(true); 
+        // localStorage.setItem('IsLoggin', 'true');
+        console.log(user);
         console.log(localStorage);
         resolve(user);
       }).catch((error: any) => reject(error));
@@ -77,6 +80,7 @@ export class AuthService {
         this.loggedIn = true;
         this.fireIsLoggedIn.emit(true); 
         localStorage.setItem('IsLoggin', 'true');
+        console.log(user);
         console.log(localStorage);
         resolve(user);
       }).catch((error: any) => reject(error));
@@ -94,11 +98,10 @@ export class AuthService {
   signOut(): Promise<any> {
     return new Promise((resolve,reject) => {
       Auth.signOut()
-      .then(() => {this.loggedIn = false;
-        //localStorage.removeItem('IsLoggin');
+      .then(() => {
+        this.loggedIn = false;
         localStorage.clear();
         this.fireIsLoggedIn.emit(false); 
-        //console.log(localStorage);
         resolve(true);
       }).catch((error: any) => reject(error));
     });

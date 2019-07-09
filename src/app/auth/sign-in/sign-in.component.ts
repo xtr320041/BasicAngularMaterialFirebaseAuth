@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { CognitoUser } from '@aws-amplify/auth';
+//import { CognitoUser } from '@aws-amplify/auth';
 import { NotificationService } from 'src/app/commonUI/notification.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -25,7 +25,7 @@ export class SignInComponent {
   get passwordInput() { return this.signinForm.get('password'); }
 
   constructor( 
-    public auth: AuthService, 
+    private auth: AuthService, 
     private _notification: NotificationService, 
     private _router: Router,
     private _loader: LoadingService ) { }
@@ -49,7 +49,7 @@ export class SignInComponent {
     let myLoad = this._loader;
     myLoad.show();
     this.auth.signIn(this.emailInput.value, this.passwordInput.value)
-      .then((user: CognitoUser|any) => {
+      .then((user: any) => {
       //.then((user: any) => {
         setTimeout(function(){ myLoad.hide(); }, 1000);
         this._router.navigate(['']);

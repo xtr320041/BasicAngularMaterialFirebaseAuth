@@ -33,6 +33,7 @@ export class AppComponent {
   doGis = false;
   version = "1.0.1";
   isSignin = false;
+  currentUserName = "";
   
   mobileQuery: MediaQueryList;
   baseNav = [
@@ -80,7 +81,7 @@ export class AppComponent {
   // private _mobileQueryListener: () => void;
   // @Output() toggleSideNav = new EventEmitter();
   
-  constructor(public auth: AuthService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private dialog: MatDialog, private loading: LoadingService) {
+  constructor(public auth: AuthService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private dialog: MatDialog, private loading: LoadingService, private myRoute: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // this.mobileQuery.addListener(this._mobileQueryListener);
@@ -101,6 +102,28 @@ export class AppComponent {
     this.auth.getEmitter().subscribe((customObject) => {
       //console.log("Component is notified of successfull login!");
       this.isSignin = customObject;
+      if (customObject){
+        this.auth.getCurrentUser()
+        .then(user => {
+          let myName = "";
+          console.log(user);
+          try{
+            if (user.attributes.given_name||user.attributes.family_name)
+              myName = user.attributes.given_name + ' ' + user.attributes.family_name
+          }
+          catch{}
+          if (!myName){
+            try{
+              myName = user.username;
+            }
+            catch{}
+          }
+          this.currentUserName = myName;        
+        })
+      }
+      else{
+        this.myRoute.navigate(['auth/signin']);
+      }
     });
     console.log(localStorage.IsLoggin);
     console.log(localStorage);
@@ -115,8 +138,23 @@ export class AppComponent {
           .then(user =>{
             console.log("current user");
             console.log(user);
-            if (user)
+            if (user){
               this.isSignin = true;
+              let myName = "";
+              console.log(user);
+              try{
+                if (user.attributes.given_name||user.attributes.family_name)
+                  myName = user.attributes.given_name + ' ' + user.attributes.family_name
+              }
+              catch{}
+              if (!myName){
+                try{
+                  myName = user.username;
+                }
+                catch{}
+              }
+              this.currentUserName = myName;                    
+            }
           })
           .catch(err => {
             console.log("error");
@@ -143,7 +181,6 @@ export class AppComponent {
     // myLoad.show();
     // setTimeout(function(){ myLoad.hide(); }, 3000);
     
-
   }
 
   signOut(){
@@ -151,6 +188,10 @@ export class AppComponent {
     .then(d => {
       this.isSignin = false;
     })
+  }
+
+  goMyAccount(){
+    this.myRoute.navigate(['auth/profile']);
   }
 
 }

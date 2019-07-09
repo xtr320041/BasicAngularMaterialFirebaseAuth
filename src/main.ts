@@ -9,10 +9,10 @@ import { environment } from './environments/environment';
 import Auth from '@aws-amplify/auth';
 import Storage from '@aws-amplify/storage';
 //It takes awsmobile for AWSConfig
-import AWSConfig from './aws-exports';
+import myConfig from './aws-exports';
 
-Storage.configure(AWSConfig);
-Auth.configure(AWSConfig);
+Storage.configure(myConfig);
+Auth.configure(myConfig);
 // End Amplify Configuration
 
 if (environment.production) {
