@@ -79,5 +79,6 @@ export class SignInComponent {
   async signInWithGoogle() {
     const socialResult = await this.auth.socialSignIn(AuthService.GOOGLE);
     console.log('google Result:', socialResult);
+    localStorage.setItem("google Result", JSON.stringify(socialResult));
   }
 }

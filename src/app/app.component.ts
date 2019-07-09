@@ -107,6 +107,23 @@ export class AppComponent {
     console.log(this.auth);
     if (localStorage.IsLoggin)
       this.isSignin = true;
+    else
+    {
+      setTimeout(() => {
+        console.log(localStorage);
+        this.auth.getCurrentUser()
+          .then(user =>{
+            console.log("current user");
+            console.log(user);
+            if (user)
+              this.isSignin = true;
+          })
+          .catch(err => {
+            console.log("error");
+            console.log(err);
+          })        
+      }, 2000);
+    }      
   }
 
   openHelp() {

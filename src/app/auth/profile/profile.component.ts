@@ -108,6 +108,8 @@ export class ProfileComponent implements OnInit {
         attributes['profile'] = this.avatar;
       }
       console.log(this.avatar);
+      console.log(this.user);
+      console.log(attributes);
       await Auth.updateUserAttributes(this.user,attributes);
       console.log("after save user.");
       if (!this.avatar && this.deleteAvatar) {
@@ -119,6 +121,7 @@ export class ProfileComponent implements OnInit {
         this._notification.show('Your profile information has been updated.');
       }
     } catch (error) {
+      this._notification.show(error.message + ' Must be in +########## format.');
       console.log(error);
     }
   }

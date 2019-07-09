@@ -95,9 +95,10 @@ export class AuthService {
     return new Promise((resolve,reject) => {
       Auth.signOut()
       .then(() => {this.loggedIn = false;
-        localStorage.removeItem('IsLoggin');
+        //localStorage.removeItem('IsLoggin');
+        localStorage.clear();
         this.fireIsLoggedIn.emit(false); 
-        console.log(localStorage);
+        //console.log(localStorage);
         resolve(true);
       }).catch((error: any) => reject(error));
     });
@@ -114,6 +115,22 @@ export class AuthService {
   socialSignIn(provider:CognitoHostedUIIdentityProvider): Promise<ICredentials> {
     return Auth.federatedSignIn({
       'provider': provider
+    });
+  }
+
+  getCurrentUser():Promise<CognitoUser|any> {
+    return new Promise((resolve,reject) => {
+      Auth.currentUserInfo()
+      .then(user => resolve(user))
+      .catch(err => reject(err));      
+    });
+  }
+
+  getCurrentCredentials():Promise<any> {
+    return new Promise((resolve,reject) => {
+      Auth.currentCredentials()
+      .then(user => resolve(user))
+      .catch(err => reject(err));      
     });
   }
 

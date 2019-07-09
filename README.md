@@ -7,6 +7,8 @@ https://github.com/mlabieniec/AngularMaterialPWA.git
 
 
 # To Setup 
+//Note: ensure Amplify CLI has been installed.<br/>
+
 Run the commands below: <br/>
 
 npm install <br/>
