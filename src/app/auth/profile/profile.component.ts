@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/commonUI/notification.service';
 import { LoadingService } from 'src/app/commonUI/loading/loading.service';
-import Auth, { CognitoUser } from '@aws-amplify/auth';
+import { CognitoUser } from '@aws-amplify/auth';
 // import Storage from '@aws-amplify/storage';
 
 @Component({
@@ -44,9 +44,9 @@ export class ProfileComponent implements OnInit {
   }
 
   async getUserInfo() {
-    this.profile = await Auth.currentUserInfo();
+    this.profile = await this._authService.getCurrentUser();
     console.log(this.profile);
-    this.user = await Auth.currentAuthenticatedUser();
+    this.user = await this._authService.getCurrentAuthenticatedUser();
     console.log(this.user);
 
     if ( this.profile.attributes['profile'] ) {
@@ -110,7 +110,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.avatar);
       console.log(this.user);
       console.log(attributes);
-      await Auth.updateUserAttributes(this.user,attributes);
+      await this._authService.updateAttributes(this.user, attributes);
       console.log("after save user.");
       if (!this.avatar && this.deleteAvatar) {
         this.user.deleteAttributes(["profile"],(error) => {

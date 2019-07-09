@@ -126,13 +126,46 @@ export class AuthService {
     });
   }
 
-  getCurrentCredentials():Promise<any> {
+  getCurrentAuthenticatedUser():Promise<any> {
     return new Promise((resolve,reject) => {
-      Auth.currentCredentials()
+      Auth.currentAuthenticatedUser()
       .then(user => resolve(user))
       .catch(err => reject(err));      
     });
   }
+
+  confirmSignUp(username: string, code: string):Promise<any> {
+    return new Promise((resolve,reject) => {
+      Auth.confirmSignUp(username, code)
+      .then(user => resolve(user))
+      .catch(err => reject(err));      
+    });
+  }
+
+  resendSignUp(email: string):Promise<any> {
+    return new Promise((resolve,reject) => {
+      Auth.resendSignUp(email)
+      .then(() => resolve(true))
+      .catch((err) => reject(err));    
+    });
+  }
+
+  updateAttributes(user: CognitoUser | any, attributes: object):Promise<any> {
+    return new Promise((resolve,reject) => {
+      Auth.updateUserAttributes(user, attributes)
+      .then(() => resolve(true))
+      .catch((err) => reject(err));    
+    });
+  }  
+
+  // return Auth.currentAuthenticatedUser()
+  // .then(() => {
+  //   this._router.navigate(['auth/profile']);
+  //   return false;
+  // })
+  // .catch(() => {
+  //   return true;
+  // });
 
   // socialSignIn(any): Promise<any> {
   //   return new Promise((resolve,reject) => {

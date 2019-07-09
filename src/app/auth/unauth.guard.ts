@@ -5,24 +5,21 @@ import {
   RouterStateSnapshot, 
   Router } from '@angular/router';
 import { Observable } from 'rxjs';
-//import Auth from '@aws-amplify/auth';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnauthGuard implements CanActivate {
-  constructor( private _router: Router ) { }
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    // return Auth.currentAuthenticatedUser()
-    //         .then(() => {
-    //           this._router.navigate(['auth/profile']);
-    //           return false;
-    //         })
-    //         .catch(() => {
-    //           return true;
-    //         });
-    return true;
+  constructor(private auth: AuthService, private _router: Router ) { }
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.auth.getCurrentAuthenticatedUser()
+            .then(() => {
+              this._router.navigate(['auth/profile']);
+              return false;
+            })
+            .catch(() => {
+              return true;
+            });
   }
 }
