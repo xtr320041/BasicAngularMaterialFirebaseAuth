@@ -54,18 +54,6 @@ export class AppComponent {
     {
       'title': 'User',
       'path': '/user'
-    },
-    {
-      'title': 'Task',
-      'path': '/task'
-    },
-    {
-      'title': 'Permission Comment',
-      'path': '/comment'
-    },
-    {
-      'title': 'Query',
-      'path': '/query'
     }
   ];
   gisNav = [

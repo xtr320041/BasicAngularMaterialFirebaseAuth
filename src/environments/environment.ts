@@ -8,6 +8,7 @@ export const environment = {
     email: '',
     password: ''
   },
+  //put you own firebase config here
   firebase: {
     apiKey: "AIzaSyBVhYfjVhq3nlbXKozTgIIAtdOdRPr7yxE",
     authDomain: "ng301-5d3dd.firebaseapp.com",

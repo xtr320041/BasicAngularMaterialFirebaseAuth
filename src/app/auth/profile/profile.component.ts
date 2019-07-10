@@ -17,7 +17,8 @@ export class ProfileComponent implements OnInit {
     email: new FormControl('',[ Validators.email ]),
     phone: new FormControl('', [ Validators.min(10) ]),
     fname: new FormControl('', [ Validators.min(2) ]),
-    lname: new FormControl('', [ Validators.min(2) ])
+    lname: new FormControl('', [ Validators.min(2) ]),
+    displayName: new FormControl('', [ Validators.min(2) ])
   });
   disableAvatar = true;
   currentAvatarUrl: string;
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
   //user: any;
   
   get emailInput() { return this.profileForm.get('email'); }
+  get displayNameInput() { return this.profileForm.get('displayName'); }
   get fnameInput() { return this.profileForm.get('fname'); }
   get lnameInput() { return this.profileForm.get('lname'); }
   get phoneInput() { return this.profileForm.get('phone'); }
@@ -39,27 +41,31 @@ export class ProfileComponent implements OnInit {
     public loading: LoadingService ) { }
 
   ngOnInit() {
-    this.loading.show();
+    //this.loading.show();
     this.getUserInfo();
   }
 
   async getUserInfo() {
     this.profile = await this._authService.getCurrentUser();
     console.log(this.profile);
+    console.log(this.profile.displayName);
+    //debugger;
     // this.user = await this._authService.getCurrentAuthenticatedUser();
     // console.log(this.user);
 
-    if ( this.profile.attributes['profile'] ) {
-      this.avatar = this.profile.attributes['profile'];
-      //this.currentAvatarUrl = await Storage.vault.get(this.avatar) as string;
-      console.log("get user info..")
-      console.log(this.currentAvatarUrl);
-    }
-    this.fnameInput.setValue(this.profile.attributes['given_name']);
-    this.lnameInput.setValue(this.profile.attributes['family_name']);
-    this.phoneInput.setValue(this.profile.attributes['phone_number']);
-    let ld = this.loading;
-    setTimeout(function(){ ld.hide(); }, 1000);    
+    // if ( this.profile.attributes['profile'] ) {
+    //   this.avatar = this.profile.attributes['profile'];
+    //   //this.currentAvatarUrl = await Storage.vault.get(this.avatar) as string;
+    //   console.log("get user info..")
+    //   console.log(this.currentAvatarUrl);
+    // }
+    // this.fnameInput.setValue(this.profile.attributes['given_name']);
+    // this.lnameInput.setValue(this.profile.attributes['family_name']);
+    // this.phoneInput.setValue(this.profile.attributes['phone_number']);
+
+    this.displayNameInput.setValue(this.profile.displayName);
+    // let ld = this.loading;
+    // setTimeout(function(){ ld.hide(); }, 1000);    
     //this.loading.hide();
   }
 
@@ -100,9 +106,9 @@ export class ProfileComponent implements OnInit {
   async editProfile() {
     try {
       let attributes = {
-        'given_name': this.fnameInput.value,
-        'family_name': this.lnameInput.value,
-        'phone_number': this.phoneInput.value
+        'name': this.displayNameInput.value
+        // 'family_name': this.lnameInput.value,
+        // 'phone_number': this.phoneInput.value
       };
       if (this.avatar) {
         attributes['profile'] = this.avatar;
@@ -110,7 +116,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.avatar);
       console.log(this.user);
       console.log(attributes);
-      //await this._authService.updateAttributes(this.user, attributes);
+      await this._authService.updateCurrentUser(attributes);
       console.log("after save user.");
       if (!this.avatar && this.deleteAvatar) {
         this.user.deleteAttributes(["profile"],(error) => {
