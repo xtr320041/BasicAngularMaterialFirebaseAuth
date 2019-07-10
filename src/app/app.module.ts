@@ -21,8 +21,10 @@ import { ConfirmCodeComponent } from './auth/confirm-code/confirm-code.component
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AvatarComponent } from './auth/profile/avatar/avatar.component';
 
-//import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MAT_DATE_LOCALE} from '@angular/material';
-
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import { AvatarComponent } from './auth/profile/avatar/avatar.component';
     MaterialModule,
 
     FormsModule, //for reactive forms
-    ReactiveFormsModule //for reactive forms
+    ReactiveFormsModule, //for reactive forms
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
   providers: [],
   bootstrap: [AppComponent],

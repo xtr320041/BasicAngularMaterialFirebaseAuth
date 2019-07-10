@@ -33,33 +33,33 @@ export class ConfirmCodeComponent implements OnInit {
   }
 
   sendAgain() {
-    this.auth.resendSignUp(this.email)
-      .then(() => this._notification.show('A code has been emailed to you'))
-      .catch(() => this._notification.show('An error occurred'));
+    // this.auth.resendSignUp(this.email)
+    //   .then(() => this._notification.show('A code has been emailed to you'))
+    //   .catch(() => this._notification.show('An error occurred'));
   }
 
   confirmCode() {
-    this.auth.confirmSignUp(this.email, this.codeInput.value)
-      .then((data: any) => {
-        console.log(data);
-        this._router.navigate(['']);
+    // this.auth.confirmSignUp(this.email, this.codeInput.value)
+    //   .then((data: any) => {
+    //     console.log(data);
+    //     this._router.navigate(['']);
         
-        if (data === 'SUCCESS' &&
-            environment.confirm.email && 
-            environment.confirm.password) {
-            this.auth.signIn(this.email, environment.confirm.password)
-            .then(() => {
-              this._router.navigate(['']);
-            }).catch((error: any) => {
-              this._router.navigate(['auth/signin']);
-            })
-        }
+    //     if (data === 'SUCCESS' &&
+    //         environment.confirm.email && 
+    //         environment.confirm.password) {
+    //         this.auth.signIn(this.email, environment.confirm.password)
+    //         .then(() => {
+    //           this._router.navigate(['']);
+    //         }).catch((error: any) => {
+    //           this._router.navigate(['auth/signin']);
+    //         })
+    //     }
 
-      })
-      .catch((error: any) => {
-        console.log(error);
-        this._notification.show(error.message);
-      })
+    //   })
+    //   .catch((error: any) => {
+    //     console.log(error);
+    //     this._notification.show(error.message);
+    //   })
   }
 
 }

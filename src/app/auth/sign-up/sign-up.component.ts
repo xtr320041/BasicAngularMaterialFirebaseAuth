@@ -74,6 +74,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
+    //({"email": this.emailInput.value, "password": this.passwordInput.value})
     this._authService.signUp({
       "email": this.emailInput.value,
       "password": this.passwordInput.value,
@@ -82,9 +83,11 @@ export class SignUpComponent implements OnInit {
       "phone": this.countryCode + this.phoneInput.value
     })
     .then((data) => {
+      console.log(data);
       environment.confirm.email = this.emailInput.value;
       environment.confirm.password = this.passwordInput.value;
-      this._router.navigate(['auth/confirm']);
+      //this._router.navigate(['auth/confirm']);
+      this._router.navigate(['/']);
     })
     .catch((error) => console.log(error));
   }

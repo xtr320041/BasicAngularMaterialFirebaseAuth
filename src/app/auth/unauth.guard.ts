@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 export class UnauthGuard implements CanActivate {
   constructor(private auth: AuthService, private _router: Router ) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.getCurrentAuthenticatedUser()
+    return this.auth.getCurrentUser2()
             .then(() => {
               this._router.navigate(['auth/profile']);
               return false;

@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
     //   }
     // });
 
-    this.auth.getCurrentAuthenticatedUser()
+    this.auth.getCurrentUser2()
       .then((u) => {
         this._router.navigate(['auth/profile']);
       })

@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private _router: Router ) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.getCurrentAuthenticatedUser()
+    return this.auth.getCurrentUser2()
       .then(() => { return true; })
       .catch(() => { 
         this._router.navigate(['auth/signin']);

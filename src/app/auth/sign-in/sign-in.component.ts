@@ -48,11 +48,12 @@ export class SignInComponent {
   signIn() {
     let myLoad = this._loader;
     myLoad.show();
-    this.auth.signIn(this.emailInput.value, this.passwordInput.value)
+    //this.auth.signIn(this.emailInput.value, this.passwordInput.value)
+    this.auth.signIn({"email": this.emailInput.value, "password": this.passwordInput.value})
       .then((user: any) => {
       //.then((user: any) => {
         setTimeout(function(){ myLoad.hide(); }, 1000);
-        this._router.navigate(['']);
+        //this._router.navigate(['/']);
       })
       .catch((error: any) => {
         console.log(error);
@@ -71,13 +72,8 @@ export class SignInComponent {
       })
   }
 
-  async signInWithFacebook() {
-    const socialResult = await this.auth.socialSignIn(AuthService.FACEBOOK);
-    console.log('fb Result:', socialResult);
-  }
-
   async signInWithGoogle() {
-    const socialResult = await this.auth.socialSignIn(AuthService.GOOGLE);
+    const socialResult = await this.auth.doGoogleLogin();
     console.log('google Result:', socialResult);
     localStorage.setItem("google Result", JSON.stringify(socialResult));
   }

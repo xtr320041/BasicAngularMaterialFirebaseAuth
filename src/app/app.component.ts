@@ -32,7 +32,7 @@ export class AppComponent {
   isAdmin = false;
   doGis = false;
   version = "1.0.1";
-  isSignin = false;
+  isSignin: any;
   currentUserName = "";
   
   mobileQuery: MediaQueryList;
@@ -85,7 +85,7 @@ export class AppComponent {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // this.mobileQuery.addListener(this._mobileQueryListener);
-    this.isSignin = this.auth.loggedIn;
+    this.isSignin = this.auth.getCurrentUser();
   }
   
   toggleMobileNav(nav: MatSidenav) {
@@ -103,29 +103,36 @@ export class AppComponent {
       //console.log("Component is notified of successfull login!");
       this.isSignin = customObject;
       if (customObject){
-        this.auth.getCurrentUser()
-        .then(user => {
-          let myName = "";
+        this.auth.getCurrentUser2()
+        .then(user =>{
+          console.log("current user");
           console.log(user);
-          try{
-            if (user.attributes.given_name||user.attributes.family_name)
-              myName = user.attributes.given_name + ' ' + user.attributes.family_name
-          }
-          catch{}
-          if (!myName){
+          if (user){
+            this.isSignin = true;
+            let myName = "";
+            console.log(user);
             try{
-              myName = user.username;
+              if (user.displayName)
+                myName = user.displayName
             }
             catch{}
+            if (!myName){
+              try{
+                myName = user.profile.name;
+              }
+              catch{
+                myName = "unknown"
+              }
+            }
+            this.currentUserName = myName;                    
           }
-          this.currentUserName = myName;        
         })
+        this.myRoute.navigate(['/']);
       }
       else{
         this.myRoute.navigate(['auth/signin']);
       }
     });
-    console.log(localStorage.IsLoggin);
     console.log(localStorage);
     console.log(this.auth);
     if (localStorage.IsLoggin)
@@ -134,7 +141,7 @@ export class AppComponent {
     {
       setTimeout(() => {
         console.log(localStorage);
-        this.auth.getCurrentUser()
+        this.auth.getCurrentUser2()
           .then(user =>{
             console.log("current user");
             console.log(user);
@@ -143,15 +150,17 @@ export class AppComponent {
               let myName = "";
               console.log(user);
               try{
-                if (user.attributes.given_name||user.attributes.family_name)
-                  myName = user.attributes.given_name + ' ' + user.attributes.family_name
+                if (user.displayName)
+                  myName = user.displayName
               }
               catch{}
               if (!myName){
                 try{
-                  myName = user.username;
+                  myName = user.profile.name;
                 }
-                catch{}
+                catch{
+                  myName = "unknown"
+                }
               }
               this.currentUserName = myName;                    
             }
