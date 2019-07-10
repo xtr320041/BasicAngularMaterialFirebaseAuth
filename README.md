@@ -11,7 +11,7 @@ npm install <br/>
 
 
 //Note: ensure the environment file is set up with your own values.<br/>
-<!-- export const environment = {
+export const environment = {
   //put you own firebase config here
   firebase: {
     apiKey: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -22,7 +22,7 @@ npm install <br/>
     messagingSenderId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     appId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
   }
-}; -->
+}; 
 
 ng serve<br/>
 
