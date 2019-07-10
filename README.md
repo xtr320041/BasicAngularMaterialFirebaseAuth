@@ -11,19 +11,19 @@ npm install <br/>
 
 
 //Note: ensure the environment file is set up with your own values.<br/>
-export const environment = {
-  //put you own firebase config here
-  firebase: {
-    apiKey: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    authDomain: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    databaseURL: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    projectId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    storageBucket: "nAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    messagingSenderId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    appId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-  }
-}; 
-
+export const environment = {<br/>
+  //put you own firebase config here<br/>
+  firebase: {<br/>
+    apiKey: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    authDomain: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    databaseURL: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    projectId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    storageBucket: "nAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    messagingSenderId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",<br/>
+    appId: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"<br/>
+  }<br/>
+}; <br/>
+<br/>
 ng serve<br/>
 
 ## Further help
